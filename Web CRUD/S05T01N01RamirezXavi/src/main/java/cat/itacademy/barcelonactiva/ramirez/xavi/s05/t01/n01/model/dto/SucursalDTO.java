@@ -14,6 +14,7 @@ import java.util.List;
 @ToString
 public class SucursalDTO implements Serializable {
 
+
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -21,36 +22,29 @@ public class SucursalDTO implements Serializable {
 
     private String name;
     private String country;
-    private String sucursaltype;
 
-    private List<String> uEcountries = List.of("Alemania", "Belgica", "Croacia", "España", "Francia", "Irlanda",
-            "Letonia", "Luxemburgo", "Paises Bajos", "Suecia", "Bulgaria", "Eslovaquia", "Estonia", "Grecia", "Malta",
-            "Polonia", "Republica Checa", "Austria", "Chipre", "Eslovenia", "Finlandia", "Hungria", "Italia",
-            "Lituania", "Portugal", "Rumania");
+    private String sucursalType;
 
+    private List<String> ueCountries = List.of("Austria","Belgium","Bulgaria","Croatia","Cyprus","Czech Republic","Denmark","Estonia","Finland",
+            "France","Germany","Greece","Hungary","Ireland","Italy","Latvia","Lithuania","Luxembourg","Malta","Netherlands"
+            ,"Poland","Portugal","Romania","Slovakia","Slovenia","Spain","Sweden");
 
-    //List<String> paisosUe2 = Arrays.asList("España");
 
     public void setCountry(String country) {
         this.country = country;
-        sucursalUE();
+        sucursalOrigin();
     }
 
-    public void sucursalUE() {
-        boolean found = false;
-        int i = 0;
+    public void sucursalOrigin() {
+        // check if country is already in the list of countries
+        if (ueCountries.contains(country)) {
+            sucursalType = "Ue sucursal";
 
-        while (i < uEcountries.size() && !found) {
-            if (country.equalsIgnoreCase(uEcountries.get(i))) {
-                sucursaltype = "Dentro de la UE";
-                found = true;
-            }
-            i++;
+        } else {
+            sucursalType = "Non Ue sucursal";
         }
-        if (!found) {
-            sucursaltype = "Fuera de la UE";
-        }
-        setSucursaltype(sucursaltype);
+        setSucursalType(sucursalType);
+
     }
 
 

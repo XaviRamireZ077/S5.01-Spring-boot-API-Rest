@@ -24,38 +24,27 @@ public class FlorDTO implements Serializable {
 
     private String flowerType;
 
-    private List<String> uEcountries = List.of("Alemania", "Belgica", "Croacia", "España", "Francia", "Irlanda",
-            "Letonia", "Luxemburgo", "Paises Bajos", "Suecia", "Bulgaria", "Eslovaquia", "Estonia", "Grecia", "Malta",
-            "Polonia", "Republica Checa", "Austria", "Chipre", "Eslovenia", "Finlandia", "Hungria", "Italia",
-            "Lituania", "Portugal", "Rumania");
+    private List<String> ueCountries = List.of("Austria","Belgium","Bulgaria","Croatia","Cyprus","Czech Republic","Denmark","Estonia","Finland",
+            "France","Germany","Greece","Hungary","Ireland","Italy","Latvia","Lithuania","Luxembourg","Malta","Netherlands"
+            ,"Poland","Portugal","Romania","Slovakia","Slovenia","Spain","Sweden");
 
-
-
-    //List<String> paisosUe2 = Arrays.asList("España");
 
     public void setCountry(String country) {
         this.country = country;
-        florUE();
+        flowerOrigin();
     }
 
-    public void florUE() {
-        boolean found = false;
-        int i = 0;
+    public void flowerOrigin() {
+        // check if country is already in the list of countries
+        if (ueCountries.contains(country)) {
+            flowerType = "Ue country";
 
-        while (i < uEcountries.size() && !found) {
-            if (country.equalsIgnoreCase(uEcountries.get(i))) {
-                flowerType = "Dentro de la UE";
-                found = true;
-            }
-            i++;
-        }
-        if (!found) {
-            flowerType = "Fuera de la UE";
+        } else {
+            flowerType = "Non Ue country";
         }
         setFlowerType(flowerType);
+
     }
-
-
 
 
 }
